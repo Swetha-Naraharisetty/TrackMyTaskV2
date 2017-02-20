@@ -113,7 +113,7 @@ public class Proximity_Alert_Activity extends Activity {
     class MyLocationListener implements LocationListener{
         @Override
         public void onLocationChanged(Location location) {
-            Log.i(TAG, "onLocationChanged: location chnged");
+            Log.i(TAG, "onLocationChanged: location changed");
             Toast.makeText(getBaseContext(), "location changed", Toast.LENGTH_LONG).show();
         }
 
