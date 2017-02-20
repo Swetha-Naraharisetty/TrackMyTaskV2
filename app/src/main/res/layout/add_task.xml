@@ -21,11 +21,11 @@
 
         >
         <Button
-            android:textSize="28dp"
-            android:layout_width="wrap_content"
+            android:textSize="28sp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Pick a place"
+            android:text="@string/pick_place"
             android:textAlignment="center"
             android:id="@+id/place_pick"
             android:layout_weight="1"
@@ -50,18 +50,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="*Task Name : "
+            android:text="@string/task_name"
             android:textAlignment="center"
             android:id="@+id/text"
             android:layout_weight="1"
             />
         <EditText
             android:layout_weight="1"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:hint="enter the task name"
+            android:hint="@string/hint_task"
             android:id="@+id/task_name"
            />
 
@@ -77,10 +77,10 @@
         android:background="@color/blue_cement"
         >
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="*Due Date : "
+            android:text="@string/due_date"
             android:textAlignment="center"
             android:id="@+id/text2"
             android:layout_weight="1"
@@ -88,19 +88,12 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:text="Set Date"
+            android:text="@string/set_date"
             android:background="@color/button_blue"
             android:id="@+id/set_date"/>
     </LinearLayout>
 
-    <TextView
-        android:text="TextView"
-        android:visibility="gone"
-        android:background="@color/blue_cement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:layout_weight="0.2" />
+
 
 
     <LinearLayout
@@ -113,11 +106,11 @@
         >
         <Button
             android:gravity="center"
-            android:textSize="28dp"
+            android:textSize="28sp"
             android:layout_width="90dp"
             android:layout_height="40dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Save"
+            android:text="@string/save"
             android:textAlignment="center"
             android:id="@+id/save_task"
             android:background="@color/blue_cement"

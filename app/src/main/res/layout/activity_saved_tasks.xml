@@ -22,8 +22,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Saved Tasks"
-            android:textSize="30dp"
+            android:text="@string/saved_tasks"
+            android:textSize="30sp"
             android:gravity="center"
             />
     </LinearLayout>

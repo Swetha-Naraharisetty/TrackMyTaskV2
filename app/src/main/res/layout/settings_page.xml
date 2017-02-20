@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/limit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:id="@+id/radius"
+        android:layout_alignBaseline="@+id/editText"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
+
+    <TextView
+        android:text="@string/meters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/radius"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="26dp"
+        android:layout_marginEnd="26dp"
+        android:id="@+id/meters" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:layout_marginTop="103dp"
+        android:id="@+id/editText"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/meters"
+        android:layout_alignEnd="@+id/meters"
+        android:hint="@string/enter_radius" />
+
+    <TextView
+        android:text="@string/alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText"
+        android:layout_alignLeft="@+id/radius"
+        android:layout_alignStart="@+id/radius"
+        android:layout_marginTop="26dp"
+        android:id="@+id/alert" />
+
+    <TextView
+        android:text="@string/TodayS_Tasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/alert"
+        android:layout_alignRight="@+id/radius"
+        android:layout_alignEnd="@+id/radius"
+        android:layout_marginTop="19dp"
+        android:id="@+id/nTodayTask" />
+
+    <TextView
+        android:text="@string/PendingS_Tasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nTodayTask"
+        android:layout_alignLeft="@+id/nTodayTask"
+        android:layout_alignStart="@+id/nTodayTask"
+        android:layout_marginTop="38dp"
+        android:id="@+id/nPendingTask" />
+
+    <Button
+        android:text="@string/settingSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nPendingTask"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:id="@+id/save_changes" />
+
+
+
+</RelativeLayout>

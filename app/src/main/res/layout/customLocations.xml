@@ -25,7 +25,7 @@
         android:layout_height="50dp"
        android:layout_weight="0.125"
         android:background="@mipmap/custom_map"
-
+        android:contentDescription="@string/title_activity_maps"
         />
 
 </LinearLayout>

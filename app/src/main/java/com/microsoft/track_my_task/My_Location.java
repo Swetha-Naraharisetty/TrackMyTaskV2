@@ -22,8 +22,8 @@ public class My_Location extends Activity {
     ListView lv1;
     Context context;
     Cursor cursor;
-    ArrayList<LatLng> latLngs = new ArrayList<LatLng>();
-    ArrayList<String> list = new ArrayList<String>();
+    ArrayList<LatLng> latLngs = new ArrayList<>();
+    ArrayList<String> list = new ArrayList<>();
     Database database = new Database(My_Location.this);
     Button back;
     @Override
@@ -57,7 +57,7 @@ public class My_Location extends Activity {
 
 
        // Toast.makeText(My_Location.this, "retrived", Toast.LENGTH_SHORT).show();
-        latLngs = database.getLatLngs();
+        latLngs = database.getLatLngsLocations();
         context=this;
 
         lv1.setAdapter(new Location_Adapter(this, list ,latLngs ));

@@ -5,11 +5,11 @@
         <item
             android:id="@+id/My_loc"
             android:icon="@drawable/ic_menu_camera"
-            android:title="My Locations" />
+            android:title="@string/locations" />
          <item
                android:id="@+id/sTasks"
                android:icon="@drawable/ic_menu_gallery"
-               android:title=" Saved Tasks" />
+               android:title="@string/saved_tasks" />
           <!-- <item
                android:id="@+id/nav_slideshow"
                android:icon="@drawable/ic_menu_slideshow"
@@ -20,7 +20,8 @@
                android:title="Tools" />-->
     </group>
 
-    <item android:title="Communicate">
+
+   <!-- <item android:title="Communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
@@ -31,6 +32,6 @@
                 android:icon="@drawable/ic_menu_send"
                 android:title="Send" />
         </menu>
-    </item>
+    </item> -->
 
 </menu>

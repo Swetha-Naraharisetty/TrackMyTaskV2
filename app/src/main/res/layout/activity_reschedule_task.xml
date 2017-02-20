@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="*Place Name : "
+            android:text="@string/place_name"
             android:textAlignment="center"
             android:id="@+id/Task_place"
             android:layout_weight="1"
@@ -36,7 +36,7 @@
             />
         <TextView
             android:layout_weight="1"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -59,14 +59,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="*Task Name : "
+            android:text="@string/task_name"
             android:textAlignment="center"
             android:id="@+id/text"
             android:layout_weight="1"
             />
         <TextView
             android:layout_weight="1"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -86,10 +86,10 @@
         android:background="@color/blue_cement"
         >
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="*Due Date : "
+            android:text="@string/due_date"
             android:textAlignment="center"
             android:id="@+id/text2"
             android:layout_weight="1"
@@ -97,7 +97,7 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:text="Set Date"
+            android:text="@string/set_date"
             android:background="@color/button_blue"
             android:id="@+id/Rset_date"/>
     </LinearLayout>
@@ -115,11 +115,11 @@
         >
         <Button
             android:gravity="center"
-            android:textSize="28dp"
+            android:textSize="28sp"
             android:layout_width="90dp"
             android:layout_height="40dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Save"
+            android:text="@string/save"
             android:textAlignment="center"
             android:id="@+id/update_task"
             android:background="@color/blue_cement"

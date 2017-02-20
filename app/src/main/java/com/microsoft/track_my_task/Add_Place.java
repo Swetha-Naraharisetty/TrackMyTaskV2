@@ -38,14 +38,14 @@ public class Add_Place extends Activity {
             @Override
             public void onClick(View v) {
                // locationChecker(mGoogleApiClient, Add_Place.this);
-                SharedPreferences.Editor editor = sp.edit();
-
-                String s1 = Place_name.getText().toString();
-                editor.putBoolean("string", true);
-                editor.putString("name",s1 );
-                editor.commit();
+//                SharedPreferences.Editor editor = sp.edit();
+//
+//                String s1 = Place_name.getText().toString();
+//                editor.putBoolean("string", true);
+//                editor.putString("name",s1 );
+//                editor.commit();
                 Intent intent = new Intent(Add_Place.this, Maps_Place_Activity.class);
-                Toast.makeText(Add_Place.this, "Maps", Toast.LENGTH_SHORT);
+                Toast.makeText(Add_Place.this, "Maps", Toast.LENGTH_SHORT).show();
                 Log.i("Place_name",String.valueOf(Place_name.getText()) );
                 intent.putExtra("Place_name",(Place_name.getText()).toString());
                 startActivity(intent);
@@ -64,11 +64,12 @@ public class Add_Place extends Activity {
                 String Place = getIntent().getStringExtra("Place_name");
                 latLng = new LatLng(latitude, longitude);
 
-                if(latLng == null){
-                    map.requestFocus();
-                    map.setError("no Map selected");
-                    Toast.makeText(Add_Place.this, "no Map selected", Toast.LENGTH_SHORT);
-                }else if(Place_name.getText().toString() == null){
+//                if(latLng == null){
+//                    map.requestFocus();
+//                    map.setError("no Map selected");
+//                    Toast.makeText(Add_Place.this, "no Map selected", Toast.LENGTH_SHORT);
+//                }else
+                if(Place_name.getText().toString() == null){
                     Place_name.requestFocus();
                     Place_name.setError("Field Cannot be empty ");
                 } else {
@@ -81,11 +82,11 @@ public class Add_Place extends Activity {
 
                     //Inserting into the locations table
                     boolean isInsert = database.insert_location(Place_name.getText().toString(), latitude, longitude, Place);
-                    Toast.makeText(Add_Place.this, Place, Toast.LENGTH_LONG).show();
+                    Toast.makeText(Add_Place.this, Place, Toast.LENGTH_SHORT).show();
 
                     // verification for successful insertion
-                    if (isInsert == false) {
-                        Toast.makeText(Add_Place.this, "location name  ALREADY EXISTS", Toast.LENGTH_LONG).show();
+                    if (!isInsert) {
+                        Toast.makeText(Add_Place.this, "location name  ALREADY EXISTS", Toast.LENGTH_SHORT).show();
                     } else {
                         Intent intent = new Intent(Add_Place.this, My_Location.class);
                         startActivity(intent);
@@ -95,24 +96,9 @@ public class Add_Place extends Activity {
         });
     }
 
-    // permission request to access GPS
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-                Place_name.setText(data.getStringExtra("Place_name"));
-                Double latitude = data.getDoubleExtra("latitude", 0);
-                Double longitude = data.getDoubleExtra("longitude", 0);
-                latLng = new LatLng(latitude, longitude);
-                Log.i("lat_lng", latLng.toString());
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
-            }
-        }
-    }//onActivityResult
+
 
 
 }

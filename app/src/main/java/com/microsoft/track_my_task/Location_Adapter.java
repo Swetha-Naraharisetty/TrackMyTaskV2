@@ -20,10 +20,10 @@ import java.util.ArrayList;
 
 class Location_Adapter extends BaseAdapter {
     My_Location ml = new My_Location();
-    ArrayList<String> result;
-    Context context;
-    ArrayList<LatLng> lat_lngs;
-    LatLng Lat_Lng;
+    private ArrayList<String> result;
+    private Context context;
+    private ArrayList<LatLng> lat_lngs;
+    private LatLng Lat_Lng;
     Database database;
     private static LayoutInflater inflater = null;
     public Location_Adapter(My_Location locations, ArrayList<String> my_loc, ArrayList<LatLng> lat_lng) {
@@ -53,7 +53,7 @@ class Location_Adapter extends BaseAdapter {
         return position;
     }
 
-    public class Holder
+    private class Holder
     {
         TextView tv;
         ImageButton map;
@@ -64,7 +64,7 @@ class Location_Adapter extends BaseAdapter {
         // TODO Auto-generated method stub
         Holder holder=new Holder();
         View rowView;
-        rowView = inflater.inflate(R.layout.custom, null);
+        rowView = inflater.inflate(R.layout.customLocations, null);
         holder.tv=(TextView) rowView.findViewById(R.id.lw1);
         holder.del_Location = (Button)rowView.findViewById(R.id.del_loc);
         holder.map=(ImageButton) rowView.findViewById(R.id.map);

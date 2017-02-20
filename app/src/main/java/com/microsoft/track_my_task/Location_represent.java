@@ -1,16 +1,27 @@
 package com.microsoft.track_my_task;
 
 import android.Manifest;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
+import android.net.Uri;
+import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -19,23 +30,27 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class LocationTracking extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+public class Location_represent extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "info";
-    private LocationManager mLocationManager = null;
+    String task_name ;
+    private GoogleMap mMap;
+    LocationManager mLocationManager = null;
     private static final int LOCATION_INTERVAL = 1000;
     private static final float LOCATION_DISTANCE = 10f;
     Location mLastLocation;
     GoogleMap googleMap;
-    Database database = new Database(LocationTracking.this);
+    LatLng userlat_lng;
+    Database db = new Database(Location_represent.this);
+    int flag = 0;
+    long MINIMUM_DISTANCECHANGE_FOR_UPDATE = 1; // in Meters
+    long MINIMUM_TIME_BETWEEN_UPDATE = 1000; // in Milliseconds
+    long POINT_RADIUS = 100000; // in Meters
+    long PROX_ALERT_EXPIRATION = 2000;
+    private final String PROX_ALERT = "wise.microsoft.com.track_my_task.PROXIMITY_ALERT";
 
-    //Bundle bundle = getIntent().getExtras();
-    //String task_name = bundle.getString("task_name");
-    String task_name ;
 
-    // Log.i("dfd",task);
-    LatLng task_latlng  ;
+
     @Override
     public void onMapReady(GoogleMap googleMap1) {
         googleMap = googleMap1;
@@ -52,10 +67,13 @@ public class LocationTracking extends FragmentActivity implements OnMapReadyCall
         @Override
         public void onLocationChanged(Location location) {
             Log.e(TAG, "onLocationChanged: " + location);
+
             mLastLocation.set(location);
-            Log.i(TAG, "onLocationChanged: "+ location.getLatitude());
-            Log.i(TAG, "onLocationChanged: "+ location.getLongitude());
-            addMarker();
+
+            Log.i(TAG, "onLocationChanged: " + location.getLatitude());
+            Log.i(TAG, "onLocationChanged: " + location.getLongitude());
+
+            addMarker(location);
         }
 
         @Override
@@ -75,8 +93,8 @@ public class LocationTracking extends FragmentActivity implements OnMapReadyCall
     }
 
     LocationListener[] mLocationListeners = new LocationListener[]{
-            new LocationListener(LocationManager.GPS_PROVIDER),
-            new LocationListener(LocationManager.NETWORK_PROVIDER)
+        new LocationListener(LocationManager.GPS_PROVIDER),
+                new LocationListener(LocationManager.NETWORK_PROVIDER)
     };
 
 
@@ -105,24 +123,11 @@ public class LocationTracking extends FragmentActivity implements OnMapReadyCall
         }
     }
 
-    private void initializeLocationManager() {
+    public void initializeLocationManager() {
         Log.e(TAG, "initializeLocationManager");
         if (mLocationManager == null) {
             mLocationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location_tracking);
-        task_name = getIntent().getStringExtra("task_name");
-        Log.i("in location tracking", task_name);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        task_latlng = database.getLatLngTask(task_name);
-        Log.i(TAG, "onCreate: initializing location manger");
-        initializeLocationManager();
-        Log.i(TAG, "onCreate: initialized location manager");
         try {
             mLocationManager.requestLocationUpdates(
                     LocationManager.NETWORK_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
@@ -144,32 +149,82 @@ public class LocationTracking extends FragmentActivity implements OnMapReadyCall
         } catch (IllegalArgumentException ex) {
             Log.d(TAG, "gps provider does not exist " + ex.getMessage());
         }
+    }
+    public void addProximityAlert(double latitude, double longitude, String Task_name) {
+
+        Intent intent = new Intent(PROX_ALERT);
+        intent.putExtra("task_name", Task_name);
+        PendingIntent proximityIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mLocationManager.addProximityAlert(
+                latitude, // the latitude of the central point of the alert region
+                longitude, // the longitude of the central point of the alert region
+                POINT_RADIUS, // the radius of the central point of the alert region, in meters
+                PROX_ALERT_EXPIRATION, // time for this proximity alert, in milliseconds, or -1 to indicate no expiration
+                proximityIntent // will be used to generate an Intent to fire when entry to or exit from the alert region is detected
+        );
+        IntentFilter filter = new IntentFilter(PROX_ALERT);
+        registerReceiver(new ProximityReceiver(), filter);
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.location_tracking);
+
+        task_name = getIntent().getStringExtra("task_name");
+        Log.i(TAG, "onCreate: " + task_name);
+
+        userlat_lng =  new LatLng(16.5673478, 81.522227);
+
+        //userlat_lng = db.getLatLng(task_name);
+
+        Log.i(TAG, "onCreate: initializing location manger");
+        initializeLocationManager();
+        Log.i(TAG, "onCreate: initialized location manager");
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Location dest = new Location("");
+        dest.setLatitude(userlat_lng.latitude);
+        dest.setLongitude(userlat_lng.longitude);
+        addMarker(dest);
+
+        addProximityAlert(userlat_lng.latitude, userlat_lng.longitude, task_name);
     }
 
-    private void addMarker() {
-        LatLng currentLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+    public void addMarker(Location location) {
+        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+
         Marker mapMarker = googleMap.addMarker(new MarkerOptions()
                 .position(currentLatLng));
-        mapMarker.setTitle("hi");
+
+        mapMarker.setTitle("Hi");
+
         Log.d(TAG, "Marker added.............................");
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng,
-                13));
+
+        if (flag == 0) {//to maintain the user zoom
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng,
+                    13));
+            flag = 1;
+        }
         Log.d(TAG, "Zoom done.............................");
-        Toast.makeText(getBaseContext(), currentLatLng.toString(), Toast.LENGTH_SHORT);
+
+        //Toast.makeText(getBaseContext(), currentLatLng.toString(), Toast.LENGTH_SHORT);
     }
-    /* public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        LatLng lat_lng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lat_lng, 13));
-        Marker place =  mMap.addMarker(new MarkerOptions()
-                .position(lat_lng));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(lat_lng));
-    }*/
 
 
 }
-
-

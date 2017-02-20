@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_home"
@@ -11,13 +12,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.microsoft.track_my_task.HomeActivity"
-    tools:showIn="@layout/app_bar_home">
+    tools:showIn="@layout/app_bar_home"
+    android:orientation="vertical">
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+
+
+
 
 
 
@@ -34,20 +34,44 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="Pending"
+                    android:text="@string/PendingS_Tasks"
                     android:gravity="center"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:id = "@+id/pending"
                     android:background="@color/blue_cement"
                     android:visibility="gone"
                     />
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="@string/TodayS_Tasks"
+                        android:gravity="center"
+                        android:textSize="25sp"
+                        android:id = "@+id/today"
+                        android:background="@color/blue_cement"
+                        android:visibility="gone"
+                        />
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:id="@+id/task_list_today"
+                        />
+                </LinearLayout>
+
                 <ListView
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="287dp"
                     android:id="@+id/task_list_pending"
                     />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -56,30 +80,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="Today"
+                    android:text="@string/Upcoming_task"
                     android:gravity="center"
-                    android:textSize="25dp"
-                    android:id = "@+id/today"
-                    android:background="@color/blue_cement"
-                    android:visibility="gone"
-                    />
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:id="@+id/task_list_today"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="upcoming"
-                    android:gravity="center"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:id = "@+id/upcoming"
                     android:background="@color/blue_cement"
 
@@ -95,5 +98,7 @@
 
 
         </LinearLayout>
-    </ScrollView>
-</RelativeLayout>
+    </LinearLayout>
+
+
+

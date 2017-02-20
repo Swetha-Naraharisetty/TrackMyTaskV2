@@ -23,10 +23,10 @@
         android:background="@color/blue_cement"
         >
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="*Add a place : "
+            android:text="@string/add_place"
             android:textAlignment="center"
             android:id="@+id/text2"
             android:layout_weight="1"
@@ -35,7 +35,7 @@
             android:id="@+id/map"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:text="maps"
+            android:text="@string/title_activity_maps1"
             android:background="@color/button_blue"/>
     </LinearLayout>
 
@@ -53,18 +53,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="*Name : "
+            android:text="@string/place_name"
             android:textAlignment="center"
             android:id="@+id/name"
             android:layout_weight="1"
             />
         <EditText
             android:layout_weight="1"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:hint="enter place name"
+            android:hint="@string/hint_place"
             android:id="@+id/task_name"/>
     </LinearLayout>
 
@@ -80,11 +80,11 @@
         android:background="@color/blue_cement"
         >
         <Button
-            android:textSize="28dp"
-            android:layout_width="wrap_content"
+            android:textSize="28sp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Save Location"
+            android:text="@string/save"
             android:textAlignment="center"
             android:id="@+id/save_place"
             android:layout_weight="1"

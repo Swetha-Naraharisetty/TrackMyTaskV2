@@ -18,15 +18,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
+//Successsfully pushed code
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     int hour, am_pm, minutes;
@@ -34,10 +37,11 @@ public class HomeActivity extends AppCompatActivity
     Database db;
     Cursor cursor;
     Context context;
-    private final String TAG= "info";
+    private final String TAG= "HomeActivity ";
     ArrayList<String> tasks_today, tasks_pending, upcoming_list;
     ListView view_today, view_pending, view_upcoming;
     TextView today, pending, upcoming;
+    Switch  startTracking;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,9 @@ public class HomeActivity extends AppCompatActivity
         view_today = (ListView)findViewById(R.id.task_list_today);
         view_pending = (ListView)findViewById(R.id.task_list_pending);
         view_upcoming = (ListView) findViewById(R.id.task_list_upcoming);
+
+
+        startTracking = (Switch) findViewById(R.id.Tracking);
 
         today = (TextView) findViewById(R.id.today);
         pending = (TextView) findViewById(R.id.pending);
@@ -158,6 +165,22 @@ public class HomeActivity extends AppCompatActivity
             Log.i("alarm", " notify");
 
 
+        startTracking.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+
+                if(isChecked){
+                    Intent intent = new Intent(HomeActivity.this, Proximity_Alert_Activity.class);
+                    startActivity(intent);
+                }else{
+
+                }
+
+            }
+        });
+
 
     }
 
@@ -187,8 +210,11 @@ public class HomeActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(HomeActivity.this, SettingsPage.class);
+            startActivity(intent);
         }
+
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -214,5 +240,6 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 }

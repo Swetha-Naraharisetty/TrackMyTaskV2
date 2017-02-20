@@ -21,33 +21,33 @@ public class AlaramReciever extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Database database = new Database(context);
-        Intent notificationIntent = new Intent(context, Notify_TaskActivity.class);
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-       /* TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(HomeActivity.class);
-        stackBuilder.addNextIntent(notificationIntent);*/
+            Database database = new Database(context);
+            Intent notificationIntent = new Intent(context, Notify_TaskActivity.class);
+            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+           /* TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+            stackBuilder.addParentStack(HomeActivity.class);
+            stackBuilder.addNextIntent(notificationIntent);*/
 
-        //PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            //PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        PendingIntent  pending_intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent  pending_intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-        Calendar calendar = GregorianCalendar.getInstance();
-        am_pm = calendar.get(Calendar.AM_PM);
-        hour = calendar.get(Calendar.HOUR_OF_DAY);
-        minutes = calendar.get(Calendar.MINUTE);
-        Log.i("hour in alarm", String.valueOf(hour));
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+            Calendar calendar = GregorianCalendar.getInstance();
+            am_pm = calendar.get(Calendar.AM_PM);
+            hour = calendar.get(Calendar.HOUR_OF_DAY);
+            minutes = calendar.get(Calendar.MINUTE);
+            Log.i("hour in alarm", String.valueOf(hour));
 
-        if(hour == 10 || hour == 18 ){
+            if(hour == 10 || hour == 18 ){
 
 
-          /*  RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.activity_notification);
+              /*  RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.activity_notification);
 
-            builder = new NotificationCompat.Builder(context.getApplicationContext())
-                    .setContent(rv)
-                    .setTicker("IranGrammy playing")
-                    .setAutoCancel(true)
+                builder = new NotificationCompat.Builder(context.getApplicationContext())
+                        .setContent(rv)
+                        .setTicker("IranGrammy playing")
+                        .setAutoCancel(true)
                     .setSmallIcon(R.mipmap.track_my_task);*/
 
 

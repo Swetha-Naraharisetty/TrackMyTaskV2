@@ -51,7 +51,7 @@
             android:layout_alignParentBottom="false"
             android:layout_centerHorizontal="true"
             android:id="@+id/player"
-            android:layout_below="@+id/divider_horizontal"
+
             android:layout_marginTop="10dp">
 
 
@@ -72,26 +72,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:id="@+id/divider_horizontal"
-            android:background="#82c7c7c7"
-            android:layout_below="@+id/info"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"></LinearLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/close"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:background="@mipmap/close" />
 
     </RelativeLayout>
 

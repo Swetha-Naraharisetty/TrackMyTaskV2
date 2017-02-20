@@ -7,6 +7,17 @@
     android:fitsSystemWindows="true"
     tools:context="com.microsoft.track_my_task.HomeActivity">
 
+    <include layout="@layout/content_home" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@mipmap/ic_add_icon"
+        app:backgroundTint="@android:color/transparent" />
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,17 +30,16 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:id="@+id/Tracking"
+            android:text="@string/Start_Tracking"
+            app:layout_anchorGravity="top|center_horizontal"
+            android:layout_gravity="top|end"
+            android:layout_weight="1" />
+
     </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_home" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/add_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@mipmap/ic_add_icon"
-        app:backgroundTint="@android:color/transparent" />
 
 </android.support.design.widget.CoordinatorLayout>
