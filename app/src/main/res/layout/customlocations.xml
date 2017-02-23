@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1.25">
@@ -9,23 +8,24 @@
         android:id="@+id/lw1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+       android:layout_weight="1"
         android:textSize="@dimen/sp_eighteen"
         android:textStyle="bold" />
-
     <Button
-        android:id="@+id/del"
+        android:id="@+id/del_loc"
         android:layout_width="@dimen/dp_fifty"
         android:layout_height="@dimen/dp_fifty"
         android:layout_weight="0.125"
         android:background="@mipmap/del"
         />
 
-    <Button
-        android:id="@+id/edit"
+    <ImageButton
+        android:id="@+id/map"
         android:layout_width="@dimen/dp_fifty"
         android:layout_height="@dimen/dp_fifty"
-        android:layout_weight="0.125"
-        android:background="@mipmap/edit" />
+       android:layout_weight="0.125"
+        android:background="@mipmap/custom_map"
+        android:contentDescription="@string/title_activity_maps"
+        />
 
 </LinearLayout>
