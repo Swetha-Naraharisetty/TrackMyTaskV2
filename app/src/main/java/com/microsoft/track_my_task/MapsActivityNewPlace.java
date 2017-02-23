@@ -32,7 +32,7 @@ public class MapsActivityNewPlace extends FragmentActivity implements OnMapReady
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_maps_new_place);
 
 
        // extras = getIntent().getExtras();        // Obtain the SupportMapFragment and get notified when the map is ready to be used.

@@ -64,7 +64,7 @@ class Location_Adapter extends BaseAdapter {
         // TODO Auto-generated method stub
         Holder holder=new Holder();
         View rowView;
-        rowView = inflater.inflate(R.layout.customLocations, null);
+        rowView = inflater.inflate(R.layout.customlocations, null);
         holder.tv=(TextView) rowView.findViewById(R.id.lw1);
         holder.del_Location = (Button)rowView.findViewById(R.id.del_loc);
         holder.map=(ImageButton) rowView.findViewById(R.id.map);

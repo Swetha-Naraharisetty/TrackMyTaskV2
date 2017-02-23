@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        >
+        <EditText
+            android:layout_margin="@dimen/dp_fifteen"
+            android:inputType="textEmailAddress"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ayshwaryasree@gmail.com"
+            android:id="@+id/email" />
+        <!--android:hint="Enter your email"-->
+        <!--android:hint="Enter your password"-->
+
+        <EditText
+            android:layout_margin="@dimen/dp_fifteen"
+            android:inputType="textPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="edwardcullen"
+            android:id="@+id/pass" />
+
+        <Button
+            android:background="@color/button_blue"
+            android:layout_margin="@dimen/dp_fifteen"
+            android:id="@+id/signin"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in"
+            />
+
+        <Button
+            android:background="@color/button_blue"
+            android:layout_margin="@dimen/dp_fifteen"
+            android:id="@+id/register"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_here"
+            />
+        <Button
+            android:background="@color/button_blue"
+            android:layout_margin="@dimen/dp_fifteen"
+            android:id="@+id/skip"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/skip"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

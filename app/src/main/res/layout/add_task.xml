@@ -11,93 +11,73 @@
     android:weightSum="3"
     android:orientation="vertical">
     <LinearLayout
-        android:layout_marginTop="80dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2"
         android:orientation="horizontal"
         android:gravity="center"
-        android:weightSum="2"
-
+        android:layout_margin="@dimen/dp_twenty"
+        android:background="@color/blue_cement"
         >
         <Button
-            android:textSize="28sp"
-            android:layout_width="0dp"
+            android:layout_margin="@dimen/dp_ten"
+            android:background="@color/button_blue"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/pick_place"
             android:textAlignment="center"
             android:id="@+id/place_pick"
-            android:layout_weight="1"
-            android:background="@color/blue_cement"
-            android:visibility="visible"
-
             />
 
 
     </LinearLayout>
     <LinearLayout
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2"
         android:orientation="horizontal"
         android:gravity="center"
-        android:weightSum="2"
         android:background="@color/blue_cement"
+        android:layout_margin="@dimen/dp_twenty"
         >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/task_name"
-            android:textAlignment="center"
-            android:id="@+id/text"
-            android:layout_weight="1"
-            />
         <EditText
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
+            android:layout_margin="@dimen/dp_ten"
+
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
+            android:gravity="center"
             android:hint="@string/hint_task"
             android:id="@+id/task_name"
            />
 
     </LinearLayout>
+
+
     <LinearLayout
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2"
         android:orientation="horizontal"
         android:gravity="center"
-        android:weightSum="2"
+        android:layout_margin="@dimen/dp_twenty"
         android:background="@color/blue_cement"
+
         >
-        <TextView
-            android:layout_width="0dp"
+        <Button
+            android:layout_margin="@dimen/dp_twenty"
+
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/due_date"
-            android:textAlignment="center"
-            android:id="@+id/text2"
-            android:layout_weight="1"
-            />
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="40dp"
             android:text="@string/set_date"
             android:background="@color/button_blue"
-            android:id="@+id/set_date"/>
+            android:textAlignment="center"
+            android:id="@+id/set_date"
+            />
+
+
     </LinearLayout>
 
-
-
-
     <LinearLayout
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/dp_thirty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.2"
@@ -106,9 +86,8 @@
         >
         <Button
             android:gravity="center"
-            android:textSize="28sp"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/dp_hundred"
+            android:layout_height="@dimen/dp_forty"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/save"
             android:textAlignment="center"

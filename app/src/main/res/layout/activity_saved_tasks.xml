@@ -21,9 +21,9 @@
         >
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/dp_sixty"
             android:text="@string/saved_tasks"
-            android:textSize="30sp"
+            android:textSize="@dimen/sp_thirty"
             android:gravity="center"
             />
     </LinearLayout>

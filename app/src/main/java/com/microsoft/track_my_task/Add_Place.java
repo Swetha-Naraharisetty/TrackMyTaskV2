@@ -89,6 +89,9 @@ public class Add_Place extends Activity {
                         Toast.makeText(Add_Place.this, "location name  ALREADY EXISTS", Toast.LENGTH_SHORT).show();
                     } else {
                         Intent intent = new Intent(Add_Place.this, My_Location.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        finish();
+
                         startActivity(intent);
                     }
                 }

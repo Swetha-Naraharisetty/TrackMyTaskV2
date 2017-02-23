@@ -6,4 +6,32 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+   <!--
+        Dimensions of the layouts
+   -->
+    <dimen name="dp_sixteen">16dp</dimen>
+    <dimen name="dp_hundred">100dp</dimen>
+    <dimen name="dp_ten">10dp</dimen>
+    <dimen name="dp_one">1dp</dimen>
+    <dimen name="dp_twenty">20dp</dimen>
+    <dimen name="dp_eighty">80dp</dimen>
+    <dimen name="dp_thirty">30dp</dimen>
+    <dimen name="dp_zero">0dp</dimen>
+    <dimen name="dp_forty">40dp</dimen>
+    <dimen name="dp_sixty">60dp</dimen>
+    <dimen name="dp_ninety">90dp</dimen>
+    <dimen name="dp_fifteen">15dp</dimen>
+    <dimen name="dp_fifty">50dp</dimen>
+    <dimen name="dp_417">417dp</dimen>
+
+    <!--
+         Text Sizes of the texts
+
+    -->
+    <dimen name="sp_thirty">30sp</dimen>
+    <dimen name="sp_twenty_eight">28sp</dimen>
+    <dimen name="sp_twenty">20sp</dimen>
+    <dimen name="sp_eighteen">18sp</dimen>
+    <dimen name="sp_forty">40sp</dimen>
+
 </resources>

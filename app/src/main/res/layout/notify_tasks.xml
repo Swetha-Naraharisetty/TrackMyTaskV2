@@ -13,7 +13,7 @@
     <TextView
         android:id="@+id/notify_task"
         android:text=""
-        android:textSize="20sp"
+        android:textSize="@dimen/sp_twenty"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

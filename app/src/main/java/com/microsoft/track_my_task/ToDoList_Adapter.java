@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import static com.google.android.gms.internal.zzs.TAG;
+
 
 class ToDoList_Adapter extends BaseAdapter {
     private int year, month, day;
@@ -31,10 +33,12 @@ class ToDoList_Adapter extends BaseAdapter {
     private Context context;
     private Database database;
     private String[] sel_options = {"Reschedule", "Start Task", "Save Task"};
-    private static LayoutInflater inflater=null;
+    private static LayoutInflater inflater= null;
     public ToDoList_Adapter(HomeActivity to_do_list, ArrayList<String> tasks) {
         // TODO Auto-generated constructor stub
+        Log.i(TAG, "ToDoList_Adapter: " + tasks);
         result=tasks;
+        Log.i(TAG, "ToDoList_Adapter: " + result);
         context= to_do_list;
         database = new Database(context);
         inflater = ( LayoutInflater )context.
@@ -74,7 +78,7 @@ class ToDoList_Adapter extends BaseAdapter {
         // TODO Auto-generated method stub
         Holder holder=new Holder();
         View rowView;
-        rowView = inflater.inflate(R.layout.customTasks, null);
+        rowView = inflater.inflate(R.layout.custom_tasks, null);
         holder.tv=(TextView) rowView.findViewById(R.id.lw1);
         holder.del=(Button) rowView.findViewById(R.id.del);
         holder.edit=(Button) rowView.findViewById(R.id.edit);
@@ -100,7 +104,7 @@ class ToDoList_Adapter extends BaseAdapter {
                 Double lat = latLng.latitude;
                 Double logn = latLng.longitude;
                 Log.i("updated date : ", dateView);
-                boolean isUpdate = database.UpdateTask(result.get(position),dateView );
+                boolean isUpdate = database.UpdateTask(result.get(position), dateView);
                 if(isUpdate)
                     Toast.makeText(context, "Updated", Toast.LENGTH_LONG).show();
                 else
@@ -127,53 +131,28 @@ class ToDoList_Adapter extends BaseAdapter {
                             // Toast.makeText(Home_Page.this, seltd_loc, Toast.LENGTH_SHORT).show();
 
 
-                            switch (seltd_loc){
-                                case "Start Task" :{
-                                                        String task = result.get(position);
-                                                        Intent intent = new Intent(context, Location_represent.class);
-                                                        intent.putExtra("task_name", task);
-                                                        Log.i("Task onclick", task);
-                                                        context.startActivity(intent);
-                                                    }
-                                case "Reschedule" : {
-                                                        Intent intent = new Intent(context, Reschedule_task.class);
-                                                        intent.putExtra("task_name", result.get(position));
-                                                        context.startActivity(intent);
-                                                    }
-                                case "Save Task" : {
-                                                        Log.i("in adapter", "before saving");
-                                                        database.save_Task(result.get(position));
-                                                   /* if(database.save_Task(result.get(position)) == false)
-                                                        Toast.makeText(context, "Not Saved", Toast.LENGTH_SHORT).show();
-                                                     else {
-                                                        Intent intent = new Intent(context, SavedTasks.class);
-                                                        context.startActivity(intent);
-                                                    }*/
-                                                     }
 
-                            }
-
-//                            if(seltd_loc.equals("Start Task")){
-//                                String task = result.get(position);
-//                                Intent intent = new Intent(context, Location_represent.class);
-//                                intent.putExtra("task_name", task);
-//
-//                                Log.i("Task onclick", task);
-//                                context.startActivity(intent);
-//                            } else if(seltd_loc.equals("Reschedule")){
-//                                Intent intent = new Intent(context, Reschedule_task.class);
-//                                intent.putExtra("task_name", result.get(position));
-//                                context.startActivity(intent);
-//                        } else if(seltd_loc.equals("Save Task")){
-//                                Log.i("in adapter", "before saving");
-//                                database.save_Task(result.get(position));
-//                               /* if(database.save_Task(result.get(position)) == false)
-//                                    Toast.makeText(context, "Not Saved", Toast.LENGTH_SHORT).show();
-//                                 else {
-//                                    Intent intent = new Intent(context, SavedTasks.class);
-//                                    context.startActivity(intent);
-//                                }*/
-//                        }
+                          if(seltd_loc.equals("Start Task")){
+                                String task = result.get(position);
+                                Intent intent = new Intent(context, Location_represent.class);
+                                intent.putExtra("task_name", task);
+                                Log.i("Task onclick", task);
+                                context.startActivity(intent);
+                            } else if(seltd_loc.equals("Reschedule")){
+                                Intent intent = new Intent(context, Reschedule_task.class);
+                                intent.putExtra("task_name", result.get(position));
+                              intent.putExtra("mode", "update");
+                                context.startActivity(intent);
+                        } else if(seltd_loc.equals("Save Task")){
+                                Log.i("in adapter", "before saving");
+                                //database.save_Task(result.get(position));
+                               if(database.save_Task(result.get(position)) == false)
+                                    Toast.makeText(context, "Not Saved", Toast.LENGTH_SHORT).show();
+                                 else {
+                                    Intent intent = new Intent(context, SavedTasks.class);
+                                    context.startActivity(intent);
+                                }
+                        }
                     }
                 });
                 android.app.AlertDialog dialog = adb.create();

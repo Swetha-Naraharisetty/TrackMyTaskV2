@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_margin="@dimen/dp_ten"
+        android:background="@color/button_blue"
+        android:gravity="center"
+        android:textSize="@dimen/sp_twenty_eight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/location_dist"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_417"
+        android:id="@+id/list_dist"/>
+</LinearLayout>

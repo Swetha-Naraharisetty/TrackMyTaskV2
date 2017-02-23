@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SavedTasks extends AppCompatActivity {
+    private static final String TAG = " SavedTasks" ;
     ListView saved_tasks;
     ArrayList<String> tasks = new ArrayList<String>();
     Database database = new Database(SavedTasks.this);
@@ -44,6 +46,8 @@ public class SavedTasks extends AppCompatActivity {
                         if(seltd_loc.equals("schedule Task")){
                             Intent intent = new Intent(SavedTasks.this, Reschedule_task.class);
                             intent.putExtra("task_name", parent.getItemAtPosition(position).toString());
+                            intent.putExtra("mode", "save");
+                            Log.i(TAG, "onClick:  save" );
                             startActivity(intent);
                         } else if(seltd_loc.equals("Delete Task")){
                             database.del_savedT(parent.getItemAtPosition(position).toString());

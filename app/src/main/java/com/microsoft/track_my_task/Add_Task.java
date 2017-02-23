@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.media.MediaBrowserCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -115,6 +116,8 @@ public class Add_Task extends Activity {
                         Toast.makeText(Add_Task.this, "Task Name  ALREADY EXISTS", Toast.LENGTH_LONG).show();
                     } else {
                         Intent intent = new Intent(Add_Task.this, HomeActivity.class);
+                        intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        finish();
                         startActivity(intent);
                     }
                 }
@@ -122,7 +125,6 @@ public class Add_Task extends Activity {
             }
         });
     }
-
     @Override
     protected Dialog onCreateDialog(int id) {
         if(id == 999){
@@ -133,7 +135,6 @@ public class Add_Task extends Activity {
     private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener(){
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-          //  view.setMinDate(System.currentTimeMillis() - 1000);
             showDate(dayOfMonth, monthOfYear + 1, year);
         }
 

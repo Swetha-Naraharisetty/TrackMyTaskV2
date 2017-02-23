@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_margin="@dimen/dp_ten"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/setting"
+            android:gravity="center"
+            android:textSize="@dimen/sp_forty"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="@dimen/sp_twenty"
+        >
+        <EditText
+            android:layout_margin="@dimen/dp_ten"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radius"
+            android:textSize="@dimen/sp_twenty"
+            android:text="@string/enter_radius"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/button_blue"
+        android:layout_margin="@dimen/dp_twenty"
+        android:weightSum="2"
+        >
+        <TextView
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notify_today"
+            android:textSize="@dimen/sp_twenty"
+            android:id="@+id/text9"/>
+
+        <Button
+            android:layout_margin="@dimen/dp_ten"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/set_time"
+            android:background="@color/blue_cement"
+            android:id="@+id/mrng"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/button_blue"
+        android:layout_margin="@dimen/dp_twenty"
+        android:weightSum="2"
+        >
+        <TextView
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notify_pending"
+            android:textSize="@dimen/sp_twenty"
+            android:id="@+id/text3"/>
+
+        <Button
+            android:layout_margin="@dimen/dp_ten"
+            android:layout_weight="1.15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/set_time"
+            android:background="@color/blue_cement"
+            android:id="@+id/eve"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="@dimen/dp_twenty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+    <Button
+        android:gravity="center"
+        android:layout_width="@dimen/dp_hundred"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/save"
+        android:textAlignment="center"
+        android:id="@+id/save"
+        android:background="@color/blue_cement"
+        />
+    </LinearLayout>
+</LinearLayout>

@@ -15,6 +15,9 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -26,57 +29,69 @@ import java.util.GregorianCalendar;
 public class ProximityReceiver extends BroadcastReceiver {
     private static final String TAG = "info";
     Location_represent lr = new Location_represent();
+    String taskname;
+    private final int NOTIFICATION_ID = 233;
+    private static int value = 0;
     @Override
     public void onReceive(Context arg0, Intent intent) {
-            generateNotification(arg0);
-        if (intent.getData() != null) {
-            Log.i(TAG, "onReceive: "+ intent.getData().toString());
-        }
-        Bundle extras = intent.getExtras();
-        if (extras != null) {
-            //give notification here
-            Toast.makeText(arg0, "here in receier", Toast.LENGTH_LONG).show();
+        //generateNotification(arg0);
+        //give notification here
+        taskname = intent.getStringExtra("task_name");
+        generateNotification(arg0, taskname);
+        Log.i(TAG, "onReceive: task nae = "+ taskname);
 
-            Log.i(TAG, "onReceive: "+ "khvtgvyugvkjbhlufvhjnjvlyiihb");
-            Log.i(TAG, "onReceive: "+ extras.getString("task_name"));
-        }
     }
 
 
-    void generateNotification( Context context){
+    public void generateNotification( Context context, String taskname1){
         Database database = new Database(context);
-        Intent notificationIntent = new Intent(context, Notify_TaskActivity.class);
+        Intent notificationIntent = new Intent(context, StartAllTasks.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-           /* TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-            stackBuilder.addParentStack(HomeActivity.class);
-            stackBuilder.addNextIntent(notificationIntent);*/
-
-        //PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        Notification.InboxStyle inboxStyle = new  Notification.InboxStyle();
         PendingIntent pending_intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-
-
-            Log.i(TAG, "generateNotification: ");
-            Notification notification = builder
+        Notification.Builder builder = new Notification.Builder(context);
+        inboxStyle.setBigContentTitle("Tasks to be completed..");
+        inboxStyle.addLine("hi events" + value);
+        value++;
+        Notification notification;
+        if(value == 1) {
+             notification = builder
                     .setContentTitle("Track My Task")
-                    .setContentText("You have a task here ...")
+                    .setContentText("You have a task here ..." + taskname1)
                     .setTicker("Task Alert!")
-                    .setSmallIcon(R.mipmap.track_my_task )
+                    .setSmallIcon(R.mipmap.track_my_task)
                     .setContentIntent(pending_intent)
                     .setAutoCancel(true)
+                    .setStyle(inboxStyle)
                     .build();
-
-            try {
-                Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                Ringtone r = RingtoneManager.getRingtone(context, alert);
-                r.play();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(0, notification);
+            sendNotification(context, notification);
+        }else if(value > 1){
+            notification = builder
+                    .setContentTitle("Track My Task")
+                    .setContentText("You have a task here ..." + taskname1)
+                    .setTicker("Task Alert!")
+                    .setSmallIcon(R.mipmap.track_my_task)
+                    .setContentIntent(pending_intent)
+                    .setAutoCancel(true)
+                    .setStyle(inboxStyle)
+                    .build();
+            sendNotification(context, notification);
         }
+
+    }
+    void sendNotification(Context context, Notification notification){
+
+        try {
+            Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(context, alert);
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify("Track My task", NOTIFICATION_ID, notification );
+
+    }
 }

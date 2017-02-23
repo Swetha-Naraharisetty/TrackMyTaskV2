@@ -15,10 +15,11 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class Reschedule_task extends AppCompatActivity {
+    private static final String TAG =" Reschedule_task" ;
     TextView place_name, task_name;
-    String RtaskName ;
-    Button set_Date, Update
-            ;
+   static   String RtaskName , mode, Place;
+    Button set_Date, Update;
+     double latitude, longitude;       ;
     int year, month, day;
     Calendar calendar;
     String dateView;
@@ -33,10 +34,9 @@ public class Reschedule_task extends AppCompatActivity {
         set_Date = (Button) findViewById(R.id.Rset_date);
         Update = (Button) findViewById(R.id.update_task);
         RtaskName = getIntent().getStringExtra("task_name");
-
+        mode = getIntent().getStringExtra("mode");
         task_name.setText(RtaskName);
-        Log.i("Rplace name", database.getTaskPlace(RtaskName));
-        place_name.setText(database.getTaskPlace(RtaskName));
+        Log.i(TAG, "onCreate:  mode " + mode);
         calendar = Calendar.getInstance();
 
         // extracting the current date from calender object
@@ -44,6 +44,19 @@ public class Reschedule_task extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(day, month + 1, year);
+        if(mode.equals("save")){
+             Place = database.getSTaskPlace(task_name.getText().toString());
+            Log.i(TAG, "onClick:  place name" + Place);
+            place_name.setText(Place);
+             latitude = database.getLatitudeST(task_name.getText().toString());
+             longitude = database.getLongitudeST(task_name.getText().toString());
+
+        }
+        if(mode.equals("update")){
+
+            Log.i("Rplace name", database.getTaskPlace(RtaskName));
+            place_name.setText(database.getTaskPlace(RtaskName));
+        }
 
         // date picker to  get gue date
         set_Date.setOnClickListener(new View.OnClickListener() {
@@ -56,13 +69,27 @@ public class Reschedule_task extends AppCompatActivity {
         Update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(mode.equals("save")) {
+                    Log.i(TAG, "onClick:  in save mode" + mode);
 
-                if(database.UpdateTask(RtaskName, dateView)){
-                    Toast.makeText(Reschedule_task.this, "Successfully Updated ", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Reschedule_task.this, HomeActivity.class);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(Reschedule_task.this, "Not Updated  ", Toast.LENGTH_LONG).show();
+                    boolean isInsert = database.insertTask(task_name.getText().toString(), dateView, latitude, longitude, Place);
+                    if (isInsert == false) {
+                        Toast.makeText(Reschedule_task.this, "Task Name  ALREADY EXISTS", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent(Reschedule_task.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+
+                } else if(mode.equals("update")) {
+                    Log.i(TAG, "onClick:  in update" + mode);
+
+                    if (database.UpdateTask(RtaskName, dateView)) {
+                        Toast.makeText(Reschedule_task.this, "Successfully Updated ", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Reschedule_task.this, HomeActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(Reschedule_task.this, "Not Updated  ", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
