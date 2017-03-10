@@ -30,32 +30,33 @@ public class ProximityReceiver extends BroadcastReceiver {
     private static final String TAG = "info";
     Location_represent lr = new Location_represent();
     String taskname;
-    private final int NOTIFICATION_ID = 233;
+    private int NOTIFICATION_ID = 233;
     private static int value = 0;
     @Override
     public void onReceive(Context arg0, Intent intent) {
         //generateNotification(arg0);
         //give notification here
         taskname = intent.getStringExtra("task_name");
-        generateNotification(arg0, taskname);
+        generateNotification(arg0, taskname, NOTIFICATION_ID);
         Log.i(TAG, "onReceive: task nae = "+ taskname);
 
     }
 
 
-    public void generateNotification( Context context, String taskname1){
+    public void generateNotification( Context context, String taskname1, int id){
+        NOTIFICATION_ID = id;
         Database database = new Database(context);
         Intent notificationIntent = new Intent(context, StartAllTasks.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Notification.InboxStyle inboxStyle = new  Notification.InboxStyle();
-        PendingIntent pending_intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        //Notification.InboxStyle inboxStyle = new  Notification.InboxStyle();
+        PendingIntent pending_intent = PendingIntent.getActivity(context, id, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification.Builder builder = new Notification.Builder(context);
-        inboxStyle.setBigContentTitle("Tasks to be completed..");
-        inboxStyle.addLine("hi events" + value);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+       // inboxStyle.setBigContentTitle("Tasks to be completed..");
+       // inboxStyle.addLine("hi events" + value);
         value++;
         Notification notification;
-        if(value == 1) {
+
              notification = builder
                     .setContentTitle("Track My Task")
                     .setContentText("You have a task here ..." + taskname1)
@@ -63,21 +64,9 @@ public class ProximityReceiver extends BroadcastReceiver {
                     .setSmallIcon(R.mipmap.track_my_task)
                     .setContentIntent(pending_intent)
                     .setAutoCancel(true)
-                    .setStyle(inboxStyle)
+
                     .build();
             sendNotification(context, notification);
-        }else if(value > 1){
-            notification = builder
-                    .setContentTitle("Track My Task")
-                    .setContentText("You have a task here ..." + taskname1)
-                    .setTicker("Task Alert!")
-                    .setSmallIcon(R.mipmap.track_my_task)
-                    .setContentIntent(pending_intent)
-                    .setAutoCancel(true)
-                    .setStyle(inboxStyle)
-                    .build();
-            sendNotification(context, notification);
-        }
 
     }
     void sendNotification(Context context, Notification notification){

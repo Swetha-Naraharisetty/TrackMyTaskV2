@@ -40,7 +40,7 @@ public class AlaramReciever extends BroadcastReceiver {
         //to group notifications
       //  Notification.InboxStyle inboxStyle = new  Notification.InboxStyle();
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification.Builder builder = new Notification.Builder(context);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         Calendar calendar = GregorianCalendar.getInstance();
         am_pm = calendar.get(Calendar.AM_PM);
         hour = calendar.get(Calendar.HOUR_OF_DAY);

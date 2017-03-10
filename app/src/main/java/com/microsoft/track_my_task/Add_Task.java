@@ -28,7 +28,7 @@ public class Add_Task extends Activity {
     Calendar calendar;
     EditText task_name;
     Button set_date, place_pick, save;
-    String Place;
+    String Place = "Pick a Place";
     String dateView;
     String[] sel_location = {"My Locations", "Add new"};
     @Override
@@ -42,6 +42,9 @@ public class Add_Task extends Activity {
         save = (Button)findViewById(R.id.save_task);
         task_name = (EditText)findViewById(R.id.task_name);
         calendar = Calendar.getInstance();
+        Place = getIntent().getStringExtra("Place_name");
+        if(Place != null)
+            place_pick.setText(Place);
 
         // extracting the current date from calender object
         year = calendar.get(Calendar.YEAR);
@@ -95,8 +98,8 @@ public class Add_Task extends Activity {
                 latitude = getIntent().getDoubleExtra("latitude", 0);
                 longitude = getIntent().getDoubleExtra("longitude", 0);
                 Place = getIntent().getStringExtra("Place_name");
-
-                Toast.makeText(Add_Task.this, Place, Toast.LENGTH_LONG).show();
+                place_pick.setText(Place);
+                Toast.makeText(Add_Task.this, Place, Toast.LENGTH_SHORT).show();
                 TlatLng = new LatLng(latitude, longitude);
                 if(task_name == null){
                     task_name.requestFocus();
@@ -107,7 +110,9 @@ public class Add_Task extends Activity {
                 } if(new Date(dateView).before(new Date(database.getDate("today")))){
                     set_date.requestFocus();
                     set_date.setError("Pick a valid date");
-                    Toast.makeText(Add_Task.this, "Pick a Valid Date", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Add_Task.this, "Pick a Valid Date", Toast.LENGTH_SHORT).show();
+
+
 
                 }else {
                     // inserting the task into task table
@@ -142,22 +147,8 @@ public class Add_Task extends Activity {
     void showDate(int day, int month, int year){
         dateView = (new StringBuilder().append(day).append("/").append(month).append("/").append(year)).toString();
         set_date.setText(dateView);
-        Toast.makeText(this, dateView, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, dateView, Toast.LENGTH_SHORT).show();
     }
 
-   /* protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-                task_name.setText(data.getStringExtra("Place_name"));
-                latitude = data.getDoubleExtra("latitude", 0);
-                longitude = data.getDoubleExtra("longitude", 0);
-                TlatLng = new LatLng(latitude, longitude);
-                Log.i("lat_lng", TlatLng.toString());
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
-            }
-        }
-    }//onActivityResult*/
 }

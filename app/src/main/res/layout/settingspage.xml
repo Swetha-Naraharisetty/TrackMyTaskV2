@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/radius"
             android:textSize="@dimen/sp_twenty"
-            android:text="@string/enter_radius"/>
+            android:inputType="number"
+            android:hint="@string/enter_radius"/>
 
     </LinearLayout>
     <LinearLayout

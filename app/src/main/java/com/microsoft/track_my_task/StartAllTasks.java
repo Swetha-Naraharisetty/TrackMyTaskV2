@@ -103,7 +103,7 @@ public class StartAllTasks extends Activity {
                 distances.add(dist);
                 if(dist < (db.getSettings_sync().getFloat(1))){
                     ProximityReceiver proximityReceiver = new ProximityReceiver();
-                    proximityReceiver.generateNotification(StartAllTasks.this, task_names.get(i));
+                    proximityReceiver.generateNotification(StartAllTasks.this, task_names.get(i), i);
                 }
             }
             arrayAdapter = new ArrayAdapter<Float>(StartAllTasks.this,android.R.layout.simple_list_item_1, distances);

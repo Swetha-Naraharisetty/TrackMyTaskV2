@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
@@ -213,9 +214,10 @@ public class Location_represent extends FragmentActivity implements OnMapReadyCa
 
         // Specifying the center of the circle
         circleOptions.center(point);
-
+        Cursor cursor =db.getSettings_sync();
+        int prox = cursor.getInt(1);
         // Radius of the circle
-        circleOptions.radius(1000);
+        circleOptions.radius(prox);
 
         // Border color of the circle
         circleOptions.strokeColor(Color.BLACK);
@@ -235,7 +237,7 @@ public class Location_represent extends FragmentActivity implements OnMapReadyCa
 
         Marker mapMarker = googleMap.addMarker(new MarkerOptions().position(currentLatLng));
 
-        mapMarker.setTitle("Hi");
+        mapMarker.setTitle(task_name);
 
         Log.d(TAG, "Marker added.............................");
 

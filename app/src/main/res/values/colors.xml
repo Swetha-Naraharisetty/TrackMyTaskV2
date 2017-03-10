@@ -6,4 +6,7 @@
     <color name="button_blue">#a9c3c6</color>
     <color name="blue_cement">#c3dcde</color>
     <color name="black">#161616</color>
+    <color name="light_blue">#00a1f1</color>
+    <color name="gradient1">#BACFFF</color>
+
 </resources>

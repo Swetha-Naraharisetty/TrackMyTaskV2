@@ -31,6 +31,9 @@ public class SettingsPage extends AppCompatActivity {
     Cursor cursor;
     int mHour, mMinute;
     String TAG = "info";
+    int db_dist;
+    String db_mor;
+    String db_eve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +48,12 @@ public class SettingsPage extends AppCompatActivity {
         cursor = database.getSettings_sync();
         Log.i("info", "onCreate: "+ cursor.getInt(1)+cursor.getString(2)+cursor.getString(3));
         //proximity.setText(String.valueOf(cursor.getInt(1)));
+        proximity.setText(String.valueOf(cursor.getInt(1)));
         morning.setText(cursor.getString(2));
         evening.setText(cursor.getString(3));
+
+        mor_time = cursor.getString(2);
+        eve_time = cursor.getString(3);
 
        morning.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -100,19 +107,21 @@ public class SettingsPage extends AppCompatActivity {
         save_changes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                distance = Integer.valueOf(proximity.getText().toString());
+                    distance = Integer.valueOf(proximity.getText().toString());
+
+                    Log.i(TAG, "onClick: " + distance + mor_time + eve_time);
 
                 boolean changed = database.setSettings(distance, mor_time, eve_time);
-                if(!changed)
-                    Toast.makeText(SettingsPage.this, "Failed to update changes", Toast.LENGTH_SHORT).show();
-                else {
-                    Toast.makeText(SettingsPage.this, "Updated Changes Succesfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SettingsPage.this, HomeActivity.class);
-                    intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    finish();
-                    startActivity(intent);
+                    if (!changed)
+                        Toast.makeText(SettingsPage.this, "Failed to update changes", Toast.LENGTH_SHORT).show();
+                    else {
+                        Toast.makeText(SettingsPage.this, "Updated Changes Succesfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SettingsPage.this, HomeActivity.class);
+                        intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        finish();
+                        startActivity(intent);
+                    }
                 }
-            }
         });
 
     }

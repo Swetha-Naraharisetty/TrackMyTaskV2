@@ -25,18 +25,27 @@ public class My_Location extends Activity {
     ArrayList<LatLng> latLngs = new ArrayList<>();
     ArrayList<String> list = new ArrayList<>();
     Database database = new Database(My_Location.this);
-    Button back;
+    Button back, addLocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_location);
+        setContentView(R.layout.saved_locations);
         lv1 = (ListView)findViewById(R.id.location_list);
         back = (Button) findViewById(R.id.back_home);
+        addLocation = (Button) findViewById(R.id.add_loc);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent  intent = new Intent(My_Location.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        addLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(My_Location.this, Add_Place.class);
                 startActivity(intent);
             }
         });

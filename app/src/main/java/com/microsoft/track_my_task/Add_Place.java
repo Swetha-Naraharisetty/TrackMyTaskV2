@@ -22,6 +22,7 @@ public class Add_Place extends Activity {
     Database database = new Database(Add_Place.this);
     LatLng latLng;
     SharedPreferences sp ;
+    String Place = "map";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,19 +34,17 @@ public class Add_Place extends Activity {
         save = (Button)findViewById(R.id.save_place);
         sp  = this.getSharedPreferences("string", 0);
 
+        Place = getIntent().getStringExtra("Place_name");
+        if(Place != null)
+            map.setText(Place);
+
 
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // locationChecker(mGoogleApiClient, Add_Place.this);
-//                SharedPreferences.Editor editor = sp.edit();
-//
-//                String s1 = Place_name.getText().toString();
-//                editor.putBoolean("string", true);
-//                editor.putString("name",s1 );
-//                editor.commit();
+
                 Intent intent = new Intent(Add_Place.this, Maps_Place_Activity.class);
-                Toast.makeText(Add_Place.this, "Maps", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Add_Place.this, "Loading Maps..", Toast.LENGTH_SHORT).show();
                 Log.i("Place_name",String.valueOf(Place_name.getText()) );
                 intent.putExtra("Place_name",(Place_name.getText()).toString());
                 startActivity(intent);
@@ -55,30 +54,19 @@ public class Add_Place extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // String s1 = sp.getString("name","my_place");
-                //Place_name.setText(s1);
-              /*  Bundle bundle = getIntent().getParcelableExtra("bundle");
-                latLng = bundle.getParcelable("Lat_Lng");*/
+
                 Double latitude = getIntent().getDoubleExtra("latitude", 0);
                 Double longitude = getIntent().getDoubleExtra("longitude", 0);
-                String Place = getIntent().getStringExtra("Place_name");
+                 Place = getIntent().getStringExtra("Place_name");
+                map.setText(Place);
                 latLng = new LatLng(latitude, longitude);
 
-//                if(latLng == null){
-//                    map.requestFocus();
-//                    map.setError("no Map selected");
-//                    Toast.makeText(Add_Place.this, "no Map selected", Toast.LENGTH_SHORT);
-//                }else
                 if(Place_name.getText().toString() == null){
                     Place_name.requestFocus();
                     Place_name.setError("Field Cannot be empty ");
                 } else {
                     Log.i("Add_place lat lng", latLng.toString());
                     Log.i("Add_place place name ", Place_name.getText().toString());
-
-                    // extracting latitude and longitude from LatLng object
-                    //double latitude = latLng.latitude;
-                    //double longitude = latLng.longitude;
 
                     //Inserting into the locations table
                     boolean isInsert = database.insert_location(Place_name.getText().toString(), latitude, longitude, Place);

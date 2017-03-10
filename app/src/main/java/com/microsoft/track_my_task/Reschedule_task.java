@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class Reschedule_task extends AppCompatActivity {
     private static final String TAG =" Reschedule_task" ;
@@ -71,16 +72,21 @@ public class Reschedule_task extends AppCompatActivity {
             public void onClick(View v) {
                 if(mode.equals("save")) {
                     Log.i(TAG, "onClick:  in save mode" + mode);
-
-                    boolean isInsert = database.insertTask(task_name.getText().toString(), dateView, latitude, longitude, Place);
-                    if (isInsert == false) {
-                        Toast.makeText(Reschedule_task.this, "Task Name  ALREADY EXISTS", Toast.LENGTH_SHORT).show();
+                    if (new Date(dateView).before(new Date(database.getDate("today")))) {
+                        set_Date.requestFocus();
+                        set_Date.setError("Pick a valid date");
+                        Toast.makeText(Reschedule_task.this, "Pick a Valid Date", Toast.LENGTH_SHORT).show();
                     } else {
-                        Intent intent = new Intent(Reschedule_task.this, HomeActivity.class);
-                        startActivity(intent);
-                    }
+                        boolean isInsert = database.insertTask(task_name.getText().toString(), dateView, latitude, longitude, Place);
+                        if (isInsert == false) {
+                            Toast.makeText(Reschedule_task.this, "Task Name  ALREADY EXISTS", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Intent intent = new Intent(Reschedule_task.this, HomeActivity.class);
+                            startActivity(intent);
+                        }
 
-                } else if(mode.equals("update")) {
+                    }
+                }else if(mode.equals("update")) {
                     Log.i(TAG, "onClick:  in update" + mode);
 
                     if (database.UpdateTask(RtaskName, dateView)) {

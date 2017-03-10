@@ -14,10 +14,13 @@
             android:id="@+id/about"
 
             android:title="@string/about" />
-          <!-- <item
-               android:id="@+id/nav_slideshow"
-               android:icon="@drawable/ic_menu_slideshow"
-               android:title="Slideshow" />
+        <item
+            android:id="@+id/log_out"
+
+            android:title="@string/log_out"
+            />
+          <!--
+          android:visible="false"
            <item
                android:id="@+id/nav_manage"
                android:icon="@drawable/ic_menu_manage"

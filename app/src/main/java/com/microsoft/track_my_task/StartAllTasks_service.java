@@ -69,7 +69,7 @@ public class StartAllTasks_service extends Service {
                 distances.add(dist);
                 if(dist < (db.getSettings_sync().getFloat(1))){
                     ProximityReceiver proximityReceiver = new ProximityReceiver();
-                    proximityReceiver.generateNotification(StartAllTasks_service.this, task_names.get(i));
+                    proximityReceiver.generateNotification(StartAllTasks_service.this, task_names.get(i),i);
                 }
             }
         }

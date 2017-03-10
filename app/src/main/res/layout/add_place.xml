@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.microsoft.track_my_task.Add_Place"
     android:weightSum="3"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:layout_margin="@dimen/dp_twenty"

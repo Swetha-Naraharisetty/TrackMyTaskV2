@@ -5,7 +5,7 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Login"
+            android:name=".Google_signin"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -32,11 +32,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity"/>
+        <activity android:name=".HomeActivity" />
         <activity android:name=".Add_Task" />
         <activity android:name=".Add_Place" />
         <activity android:name=".My_Location" />
-        <activity android:name=".StartAllTasks"/>
+        <activity android:name=".StartAllTasks" />
         <activity
             android:name=".Maps_Place_Activity"
             android:label="@string/title_activity_maps" />
@@ -46,7 +46,7 @@
         <activity
             android:name=".MapsActivityNewPlace"
             android:label="@string/title_activity_maps_new_place" />
-        <activity android:name=".Location_represent"/>
+        <activity android:name=".Location_represent" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -58,8 +58,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
-        <activity android:name=".NotificationActivity" />
 
         <receiver android:name=".AlaramReciever">
             <intent-filter>
@@ -80,13 +78,8 @@
         <activity android:name=".Reschedule_task" />
         <activity android:name=".SavedTasks" />
         <activity android:name=".SettingsPage" />
-        <!--<service android:name=".Proximity_service"/> -->
-        <activity
-            android:name=".Auth"
-            android:label="@string/title_activity_auth"></activity>
-
-
-
+        <!-- <service android:name=".Proximity_service"/> -->
+        <activity android:name=".About"></activity>
     </application>
 
 </manifest>

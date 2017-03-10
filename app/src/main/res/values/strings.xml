@@ -46,5 +46,7 @@
     <string name="sign_in">Sign In</string>
     <string name="distance_from_current">Distance From Current</string>
     <string name="distance_task_name">task name</string>
+    <string name="add_location">Add New Location</string>
+    <string name="log_out">Log Out</string>
 
 </resources>

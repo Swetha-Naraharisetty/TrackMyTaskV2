@@ -532,9 +532,11 @@ public class Database extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         Log.i(TAG, "inserValues:  distance =  " + distance + "morning time  = " + morning_time + "evening time  = " + evening_time   );
 
-        if(distance < 500 || morning_time == null || evening_time == null  )
+        if(distance < 0 && morning_time == null && evening_time == null  )
             return false;
         else {
+            Cursor cursor = getSettings_sync();
+
             contentValues.put("key", 1);
             contentValues.put("distance", distance);
             contentValues.put("morning_time", (morning_time));
@@ -543,7 +545,6 @@ public class Database extends SQLiteOpenHelper {
 
             Log.i(TAG, "insertValues: inserting");
             Log.i(TAG, "inserValues:  distance =  " + distance + "morning time string = " + String.valueOf(morning_time) + "evening time  = " + evening_time);
-            Cursor cursor = getSettings_sync();
 
             long result = db.update("settings", contentValues, "key = ?",new String[] {"1"});
 
@@ -651,6 +652,38 @@ public class Database extends SQLiteOpenHelper {
             }
         }
         return tasks_upcoming;
+    }
+
+    boolean truncate_all_tables(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from task");
+        db.execSQL("delete from locations");
+        db.execSQL("delete from saved_tasks");
+        db.execSQL("delete from settings");
+        return true;
+    }
+
+    public boolean insert_savedTasks(String task_name, Double latitude , Double longitude, String Place_name ){
+        SQLiteDatabase db = this.getWritableDatabase();
+        if(task_name == null || latitude == null || longitude == null || Place_name == null  ){
+            return false;
+        }
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("task_name", task_name);
+        contentValues.put("latitude", latitude );
+        contentValues.put("longitude", longitude );
+        contentValues.put("Place_name", Place_name);
+        Log.i(TAG, "inserValues: " + task_name + "latitude: " + latitude + "longitude : "+ longitude + "Place : " + Place_name);
+
+        long result =  db.insert("saved_tasks", null, contentValues);
+        Log.i(TAG, "insertValues_location: inserted");
+        db.close();
+        if(result == -1)
+            return  false;
+        else
+            return true;
+
     }
 
 
