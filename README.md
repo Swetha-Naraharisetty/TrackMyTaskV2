@@ -1,0 +1,2 @@
+# TrackMyTaskV2
+Track My Task will remind you about the errands to be done when you are around the place. You can just do all your tasks if they are along your way. With added maps now you can see your route to your task .If tasks are not on your way no worries Track My Task will remind you at the end of the day and alert you with the tasks to be completed today at the dawn. You can create your own Track My Task by setting the time to remind, the proximity. You can view your tasks from anywhere just with your Google sign in from our cloud.
